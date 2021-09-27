@@ -1,4 +1,3 @@
-
 namespace CatalogAPI;
 public class WeatherForecast
 {

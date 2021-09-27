@@ -1,4 +1,7 @@
-using Microsoft.OpenApi.Models;
+global using System;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
