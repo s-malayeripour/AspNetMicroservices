@@ -2,6 +2,10 @@ global using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using CatalogAPI.Repositories.Interfaces;
+using CatalogAPI.Repositories;
+using CatalogAPI.Data.Interfaces;
+using CatalogAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +16,8 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "CatalogAPI", Version = "v1" });
 });
+builder.Services.AddScoped<ICatalogContext, CatalogContext>();
+builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
 
 var app = builder.Build();
 
@@ -24,7 +30,5 @@ if (builder.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
