@@ -8,9 +8,11 @@ namespace CatalogAPI.Data
     public class CatalogContext : ICatalogContext
     {
         public IMongoCollection<Product> Products { get; }
+
         public CatalogContext(IConfiguration config)
         {
-            MongoClient client = new MongoClient(config.GetValue<string>("DatabaseSettings:ConnectionString"));
+            string connectionString = config.GetValue<string>("DatabaseSettings:ConnectionString");
+            MongoClient client = new MongoClient(connectionString);
             IMongoDatabase database = client.GetDatabase(config.GetValue<string>("DatabaseSettings:DatabaseName"));
             Products = database.GetCollection<Product>(config.GetValue<string>("DatabaseSettings:CollectionName"));
             SeedProducts();

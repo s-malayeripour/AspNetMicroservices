@@ -21,7 +21,7 @@ namespace CatalogAPI.Repositories
 
         public async Task<Product> GetProduct(string id) =>
             await _context.Products.Find(p => p.Id == id).FirstOrDefaultAsync();
-        
+
         public async Task<IEnumerable<Product>> GetProductByName(string name)
         {
             FilterDefinition<Product> filterDefinision = Builders<Product>.Filter.Eq(p => p.Name, name);
@@ -34,22 +34,14 @@ namespace CatalogAPI.Repositories
             return await _context.Products.Find(filterDefinision).ToListAsync();
         }
 
-        public async Task<bool> TryCreateProduct(Product product)
+        public async Task CreateProduct(Product product)
         {
-            try
-            {
-                await _context.Products.InsertOneAsync(product);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            await _context.Products.InsertOneAsync(product);
         }
 
         public async Task<bool> UpdateProduct(Product product)
         {
-            ReplaceOneResult result = await _context.Products.ReplaceOneAsync(p=>p.Id == product.Id, product);
+            ReplaceOneResult result = await _context.Products.ReplaceOneAsync(p => p.Id == product.Id, product);
             bool isUpdated = result.IsAcknowledged && result.ModifiedCount > 0;
             return isUpdated;
         }
