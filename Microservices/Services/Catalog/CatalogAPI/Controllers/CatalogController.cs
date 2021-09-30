@@ -31,7 +31,7 @@ namespace CatalogAPI.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                return Content(ex.Message, "Error");
+                return Content(ex.Message, "text/html");
             }
         }
 
@@ -53,7 +53,7 @@ namespace CatalogAPI.Controllers
             }
             catch (Exception ex)
             {
-                return Content(ex.Message, "Error");
+                return Content(ex.Message, "text/html");
             }
         }
 
@@ -73,12 +73,12 @@ namespace CatalogAPI.Controllers
             }
             catch (Exception ex)
             {
-                return Content(ex.Message, "Error");
+                return Content(ex.Message, "text/html");
             }
         }
 
         [HttpPost]
-        public async Task<ActionResult<Product>> CreateProduct([FromBody]Product product)
+        public async Task<ActionResult<Product>> CreateProduct([FromBody] Product product)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace CatalogAPI.Controllers
             }
             catch (Exception ex)
             {
-                return Content(ex.Message, "Error");
+                return Content(ex.Message, "text/html");
             }
         }
 
@@ -106,7 +106,7 @@ namespace CatalogAPI.Controllers
             }
             catch (Exception ex)
             {
-                return Content(ex.Message, "Error");
+                return Content(ex.Message, "text/html");
             }
         }
 
@@ -125,7 +125,7 @@ namespace CatalogAPI.Controllers
             }
             catch (Exception ex)
             {
-                return Content(ex.Message, "Error");
+                return Content(ex.Message, "text/html");
             }
         }
     }
