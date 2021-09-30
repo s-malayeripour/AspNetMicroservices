@@ -17,7 +17,7 @@ namespace BasketAPI.Repositories
         public async Task<ShoppingCart?> GetBasket(string userName)
         {
             string basketJson = await _redisCache.GetStringAsync(userName);
-            if (string.IsNullOrEmpty(basketJson)) throw new KeyNotFoundException($"The value of key : {userName} not found in memory cache");
+            if (string.IsNullOrWhiteSpace(basketJson)) return null;
             ShoppingCart? deserializedObject = JsonConvert.DeserializeObject<ShoppingCart>(basketJson);
             return deserializedObject;
         }
