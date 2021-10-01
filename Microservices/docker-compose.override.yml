@@ -69,3 +69,14 @@ services:
       - "8001:80"
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  discountapi:
+    container_name: DiscountAPI
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings__ConnectionString=Server=DiscountDB;Port=5432;Database=DiscountDB;User Id=admin;Password=admin123"
+    depends_on:
+      - DiscountDB
+    ports:
+      - "8003:80"
+
