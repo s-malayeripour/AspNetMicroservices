@@ -1,7 +1,7 @@
-﻿using BasketAPI.Entities;
+﻿using Newtonsoft.Json;
+using BasketAPI.Entities;
 using BasketAPI.Repositories.Interfaces;
 using Microsoft.Extensions.Caching.Distributed;
-using Newtonsoft.Json;
 
 namespace BasketAPI.Repositories
 {
@@ -29,7 +29,6 @@ namespace BasketAPI.Repositories
             return await GetBasket(shoppingCart.UserName);//To insure that it's synced with Redis DB
         }
 
-        public async Task DeleteBasket(string userName) =>
-            await _redisCache.RemoveAsync(userName);
+        public async Task DeleteBasket(string userName) => await _redisCache.RemoveAsync(userName);
     }
 }

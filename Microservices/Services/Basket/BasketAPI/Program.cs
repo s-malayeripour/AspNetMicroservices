@@ -9,9 +9,10 @@ IConfiguration configuration = new ConfigurationBuilder()
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+string cacheConnectionString = configuration.GetValue<string>("CacheSettings:ConnectionString");
 builder.Services.AddStackExchangeRedisCache(options =>
 {
-    options.Configuration = configuration.GetValue<string>("CacheSettings:ConnectionString");
+    options.Configuration = cacheConnectionString;
 });
 
 builder.Services.AddSwaggerGen(c =>
@@ -25,7 +26,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BasketAPI v1"));
 }
-app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
