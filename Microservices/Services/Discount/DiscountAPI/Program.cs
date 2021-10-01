@@ -1,3 +1,5 @@
+using DiscountAPI.Repositories;
+using DiscountAPI.Repositories.Interfaces;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "DiscountAPI", Version = "v1" });

@@ -15,6 +15,29 @@ services:
     volumes:
       - mongo_data:/data/db
 
+  DiscountDB:
+    container_name: DiscountDB
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin123
+      - POSTGRES_DB=DiscountDB
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data 
+
+  PGAdmin:
+    container_name: PGAdmin
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@aspdotnet.com
+      - PGADMIN_DEFAULT_PASSWORD=admin1234
+    volumes:
+      - pgadmin_date:/root/.pgadmin
+
   Portainer:
     container_name: Portainer
     restart: always
