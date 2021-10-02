@@ -78,5 +78,5 @@ services:
     depends_on:
       - DiscountDB
     ports:
-      - "8003:80"
+      - "8002:80"
 
