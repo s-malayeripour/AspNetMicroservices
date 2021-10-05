@@ -19,10 +19,18 @@ namespace DiscountGRPC.Services
             _mapper = mapper;
         }
 
-        public override Task<CouponModel> GetDiscount(GetDiscountRequest request, ServerCallContext context)
+        public async override Task<CouponModel> GetDiscount(GetDiscountRequest request, ServerCallContext context)
         {
-            return base.GetDiscount(request, context);
-
+            try
+            {
+                Coupon resultCouponModel = await _discountRepository.GetDiscount(request.ProductName);
+                CouponModel convertedResult = _mapper.Map<CouponModel>(resultCouponModel);
+                return convertedResult;
+            }
+            catch (Exception ex)
+            {
+                throw new RpcException(new Status(StatusCode.Unknown, ex.Message));
+            }
         }
 
         public async override Task<CouponModel> CreateDiscount(CreateDiscountRequest request, ServerCallContext context)
